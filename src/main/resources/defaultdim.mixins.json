@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.kyrptonaught.defaultdim.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerManagerMixin",
+    "ServerPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

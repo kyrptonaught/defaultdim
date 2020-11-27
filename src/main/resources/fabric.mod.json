@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "defualtdim",
+  "version": "1.0.0-1.16",
+  "name": "Default Dimension",
+  "description": "Set the default spawn dimension",
+  "authors": [
+    "kyrptonaught"
+  ],
+  "contact": {
+    "homepage": "https://github.com/kyrptonaught/defualtdim",
+    "sources": "https://github.com/kyrptonaught/defualtdim"
+  },
+  "license": "MIT",
+  "icon": "assets/defaultdim/icon.png",
+  "environment": "*",
+  "mixins": [
+    {
+      "config": "defaultdim.mixins.json",
+      "environment": "*"
+    }
+  ],
+  "entrypoints": {
+    "main": [
+      "net.kyrptonaught.defaultdim.DefaultDimMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
+}
