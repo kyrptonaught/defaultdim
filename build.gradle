@@ -26,8 +26,8 @@ bintray {
 	key = System.getenv('BINTRAY_KEY')
 	publications = ['bintrayPublication']
 	pkg {
-		repo = 'defaultdim'
-		name = 'defaultdim'
+		repo = 'DefaultDim'
+		name = 'DefaultDim'
 		userOrg = 'kyrptonaught'
 		licenses = ['MIT']
 		vcsUrl = 'https://github.com/kyrptonaught/defaultdim'
@@ -75,7 +75,7 @@ publishing {
 	publications {
 		bintrayPublication(MavenPublication) {
 			groupId 'net.kyrptonaught'
-			artifactId 'defaultdim'
+			artifactId 'DefaultDim'
 			version project.version
 
 			artifact(remapJar) {
