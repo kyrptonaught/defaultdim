@@ -1,11 +1,13 @@
 package net.kyrptonaught.defaultdim.mixin;
 
+import net.kyrptonaught.defaultdim.api.DefaultDimApi;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,18 +23,18 @@ public abstract class PlayerManagerMixin {
 
     @Redirect(method = "respawnPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;getOverworld()Lnet/minecraft/server/world/ServerWorld;"))
     public ServerWorld setCustomRespawn(MinecraftServer server) {
-        return server.getWorld(World.NETHER);
+        return server.getWorld(DefaultDimApi.getRegistryKey(server));
     }
 
     @Redirect(method = "createPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;getOverworld()Lnet/minecraft/server/world/ServerWorld;"))
     public ServerWorld setCustomSpawn(MinecraftServer server) {
-        return server.getWorld(World.NETHER);
+        return server.getWorld(DefaultDimApi.getRegistryKey(server));
     }
 
-    @Redirect(method = "Lnet/minecraft/server/PlayerManager;onPlayerConnect(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ServerPlayerEntity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;getWorld(Lnet/minecraft/util/registry/RegistryKey;)Lnet/minecraft/server/world/ServerWorld;"))
+    @Redirect(method = "onPlayerConnect(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ServerPlayerEntity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;getWorld(Lnet/minecraft/util/registry/RegistryKey;)Lnet/minecraft/server/world/ServerWorld;"))
     public ServerWorld connect(MinecraftServer server, RegistryKey<World> key, ClientConnection connection, ServerPlayerEntity player) {
         if (this.loadPlayerData(player) == null) {
-            return server.getWorld(World.NETHER);
+            return server.getWorld(DefaultDimApi.getRegistryKey(server));
         }
         return server.getWorld(key);
     }

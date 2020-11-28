@@ -3,8 +3,7 @@
   "package": "net.kyrptonaught.defaultdim.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerManagerMixin",
-    "ServerPlayerMixin"
+    "PlayerManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
